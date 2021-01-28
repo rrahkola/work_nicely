@@ -1,0 +1,12 @@
+# Stashes each repo and checks out latest version of master
+cd /Users/RRahk1/nikedev/repos
+cwd=$(pwd)
+for repodir in $(ls $cwd); do
+    echo "Resetting repo: ${repodir}"
+    cd $cwd/$repodir
+    git add . && git stash push -m "auto-stash $(date -j +"%Y-%m-%d %H:%M:%S %Z")" || continue
+    git checkout master || continue
+    git fetch origin || continue
+    git pull origin master || continue
+    cd $pwd
+done

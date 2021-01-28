@@ -1,0 +1,10 @@
+# Repo management, from ~/nikedev/repos directory(/link):
+cd /Users/RRahk1/nikedev/repos
+cwd=$(pwd)
+for repodir in $(ls $cwd); do
+    echo "Updating repo: ${repodir}"
+    cd ~/nikedev/repos/$repodir
+    git fetch origin
+    git pull origin
+done
+cd ~/nikedev/repos

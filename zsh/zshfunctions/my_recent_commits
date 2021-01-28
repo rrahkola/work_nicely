@@ -1,0 +1,14 @@
+# Get my recent commits in every repo
+if [ -z "$1" ]; then echo "Usage: my_recent_commits YYYY-MM-DD"; return 0; fi
+cwd=$(pwd)
+output=~/Desktop/recent-commits-$(date +"%Y%m%d").txt
+echo "Commits since ${1} in checked-out repos as of $(date +"%Y-%m-%d")" > ${output}
+cd ~/nikedev/repos
+for repo in $(dir); do
+    cd ~/nikedev/repos/${repo}
+    tmp=$(my_commits --since="$1")
+    if [ -n "$tmp" ]; then
+        echo -e "\n============\n$(git config remote.origin.url)\n============\n${tmp}" >> ${output}
+    fi
+done
+cd $cwd

@@ -1,0 +1,9 @@
+# removes node_modules and other package-manager installed folders
+cd /Users/RRahk1/nikedev/repos
+cwd=$(pwd)
+for repodir in $(ls $cwd); do
+    echo "Clearing node_modules from repo: ${repodir}"
+    cd ~/nikedev/repos/$repodir
+    rm -rf node_modules
+done
+cd ~/nikedev/repos
