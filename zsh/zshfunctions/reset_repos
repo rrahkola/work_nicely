@@ -4,8 +4,9 @@ cwd=$(pwd)
 for repodir in $(ls $cwd); do
     echo "Resetting repo: ${repodir}"
     cd $cwd/$repodir
+    ORIGIN_HEAD=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@^refs/remotes/origin/@@')
     git add . && git stash push -m "auto-stash $(date -j +"%Y-%m-%d %H:%M:%S %Z")" || continue
-    git checkout master || continue
+    git checkout "$ORIGIN_HEAD" || continue
     git fetch origin || continue
     git pull origin master || continue
     cd $pwd

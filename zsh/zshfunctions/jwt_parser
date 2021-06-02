@@ -1,0 +1,11 @@
+# Reads JWT from stdin and outputs header, payload, and secret
+read jwt
+read h p s <<< $(echo $jwt | tr "[-_]" "[+/]" | sed 's/\./ /g')
+
+cat <<EOF | jq -r .
+{
+  "header": $(echo $h | base64 -d -),
+  "payload": $(echo $p | base64 -d -),
+  "secret": "$s"
+}
+  

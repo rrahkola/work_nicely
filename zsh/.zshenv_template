@@ -2,6 +2,9 @@
 # .zshenv     -- search path, common env variables
 ###
 
+# Homebrew `sbin` in PATH
+export PATH="/usr/local/sbin:$PATH"
+
 # NodeJS environment manager -- `brew install nvm`
 export NVM_DIR="/Users/RRahk1/nikedev/Packages/nvm"
 export NVM_AUTOLOAD=1
@@ -16,6 +19,14 @@ export GROOVY_HOME=/usr/local/opt/groovy/libexec
 # Java environment switcher
 export PATH="$HOME/.jenv/bin:$PATH"
 
+# Poetry python package management tool
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # Zsh options
 DIRSTACKSIZE=8
 export ZDOTDIR="<<ZDOTDIR>>"
+
+# source personal-tokens
+if [ -f "${HOME}/.personal-tokens" ]; then
+  . "${HOME}/.personal-tokens"
+fi
